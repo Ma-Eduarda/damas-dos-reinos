@@ -27,7 +27,7 @@
     </dependencies>
 
     <build>
-        <finalName>damas-dos-reinos</finalName>
+        <finalName>damas</finalName>
         <plugins>
             <!-- Compila o código com a versão do Java definida acima -->
             <plugin>
@@ -51,7 +51,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Main</mainClass>
+                            <mainClass>damas.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

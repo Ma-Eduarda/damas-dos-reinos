@@ -9,9 +9,9 @@ public class Main {
         ConsoleUi consoleUi = new ConsoleUi();
 
         try (Scanner sc = new Scanner(System.in)) {
-            System.out.println("==================================================");
-            System.out.println("                 DAMAS DOS REINOS                 ");
-            System.out.println("==================================================");
+            System.out.println("================================");
+            System.out.println("       DAMAS DOS REINOS         ");
+            System.out.println("================================");
             
             while (!jogo.verificarFimDeJogo()) {
                 consoleUi.imprimirTabuleiro(jogo.getTabuleiro());
