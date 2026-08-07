@@ -120,7 +120,6 @@ public class Jogo {
     private boolean temMovimentoValido(Peca peca) {
         for (int x = 0; x < Tabuleiro.MAX_LINHAS; x++) {
             for (int y = 0; y < Tabuleiro.MAX_COLUNAS; y++) {
-
                 Casa destino = tabuleiro.getCasa(x, y);
                 if (peca.podeMover(destino, tabuleiro) || peca.podeCapturar(destino, tabuleiro)) {
                     return true;
