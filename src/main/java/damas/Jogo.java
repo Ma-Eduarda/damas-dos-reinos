@@ -1,3 +1,8 @@
+package damas;
+import damas.peca.Peca;
+import damas.tabuleiro.Casa;
+import damas.tabuleiro.Tabuleiro;
+
 public class Jogo {
     private final Tabuleiro tabuleiro;
     private Peca.Cor turnoAtual;
@@ -27,7 +32,7 @@ public class Jogo {
         Casa origem = tabuleiro.getCasa(xOrig, yOrig);
         Casa destino = tabuleiro.getCasa(xDest, yDest);
 
-        if (origem == null || destino == null || origem.estaVazia() || origem.getPeca().getCor() != turnoAtual) {
+        if (origem == null || destino == null || origem.estaVazia()|| origem.getPeca().getCor() != turnoAtual) {
             System.out.println("Origem inválida ou peça não pertence ao turno atual!");
             return false;
         }
@@ -35,12 +40,11 @@ public class Jogo {
         Peca peca = origem.getPeca();
         boolean jogadaFeita = false;
 
-        // Tenta Capturar
         if (peca.podeCapturar(destino, tabuleiro)) {
             peca.executarCaptura(destino, tabuleiro);
             jogadaFeita = true;
-        } 
-        // Tenta Mover
+        }
+
         else if (peca.podeMover(destino, tabuleiro)) {
             peca.posicionar(destino);
             jogadaFeita = true;
@@ -48,15 +52,20 @@ public class Jogo {
 
         if (jogadaFeita) {
             peca.verificarPromocao(peca.getCasa().getX());
-            turnoAtual = (turnoAtual == Peca.Cor.BRANCO) ? Peca.Cor.NEGRO : Peca.Cor.BRANCO;
+            if (turnoAtual == Peca.Cor.BRANCO) {
+                turnoAtual = Peca.Cor.NEGRO;
+            } else {
+                turnoAtual = Peca.Cor.BRANCO;
+            }
             return true;
         }
 
         System.out.println("Movimento ou captura inválida!");
+
         return false;
     }
 
-// --- VERIFICAÇÃO DE FIM DE JOGO
+    // --- VERIFICAÇÃO DE FIM DE JOGO ---
     public boolean verificarFimDeJogo() {
         int pecasBrancas = 0;
         int pecasNegras = 0;
@@ -66,6 +75,7 @@ public class Jogo {
         for (int x = 0; x < Tabuleiro.MAX_LINHAS; x++) {
             for (int y = 0; y < Tabuleiro.MAX_COLUNAS; y++) {
                 Casa casa = tabuleiro.getCasa(x, y);
+
                 if (!casa.estaVazia()) {
                     Peca peca = casa.getPeca();
 
@@ -74,7 +84,8 @@ public class Jogo {
                         if (temMovimentoValido(peca)) {
                             movimentoPossivelBranco = true;
                         }
-                    } else {
+                    }
+                    else {
                         pecasNegras++;
                         if (temMovimentoValido(peca)) {
                             movimentoPossivelNegro = true;
@@ -84,25 +95,23 @@ public class Jogo {
             }
         }
 
-        // Vitória por eliminação
         if (pecasBrancas == 0) {
-            System.out.println("\n👑 FIM DE JOGO! Vitória do REINO NEGRO! 👑");
+            System.out.println( "\n👑 FIM DE JOGO! " + "Vitória do REINO NEGRO! 👑");
             return true;
         }
 
         if (pecasNegras == 0) {
-            System.out.println("\n👑 FIM DE JOGO! Vitória do REINO BRANCO! 👑");
+            System.out.println("\n👑 FIM DE JOGO! " + "Vitória do REINO BRANCO! 👑");
             return true;
         }
 
-        // Vitória por afogamento
-        if (turnoAtual == Peca.Cor.BRANCO && movimentoPossivelBranco == false) {
-            System.out.println("\n👑 FIM DE JOGO! O REINO BRANCO está afogado! Vitória do REINO NEGRO! 👑");
+        if (turnoAtual == Peca.Cor.BRANCO&& !movimentoPossivelBranco) {
+            System.out.println("\n👑 FIM DE JOGO! " + "O REINO BRANCO está afogado! " + "Vitória do REINO NEGRO! 👑");
             return true;
         }
 
-        if (turnoAtual == Peca.Cor.NEGRO && movimentoPossivelNegro == false) {
-            System.out.println("\n👑 FIM DE JOGO! O REINO NEGRO está afogado! Vitória do REINO BRANCO! 👑");
+        if (turnoAtual == Peca.Cor.NEGRO && !movimentoPossivelNegro) {
+            System.out.println("\n👑 FIM DE JOGO! " + "O REINO NEGRO está afogado! " + "Vitória do REINO BRANCO! 👑");
             return true;
         }
         return false;
@@ -111,9 +120,9 @@ public class Jogo {
     private boolean temMovimentoValido(Peca peca) {
         for (int x = 0; x < Tabuleiro.MAX_LINHAS; x++) {
             for (int y = 0; y < Tabuleiro.MAX_COLUNAS; y++) {
+
                 Casa destino = tabuleiro.getCasa(x, y);
-                if (peca.podeMover(destino, tabuleiro)
-                        || peca.podeCapturar(destino, tabuleiro)) {
+                if (peca.podeMover(destino, tabuleiro) || peca.podeCapturar(destino, tabuleiro)) {
                     return true;
                 }
             }

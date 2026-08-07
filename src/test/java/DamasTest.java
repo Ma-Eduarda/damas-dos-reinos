@@ -1,10 +1,18 @@
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import damas.Jogo;
+import damas.peca.Cavaleiro;
+import damas.peca.Mago;
+import damas.peca.Peca;
+import damas.peca.Soldado;
+import damas.peca.SoldadoReal;
+import damas.tabuleiro.Casa;
+import damas.tabuleiro.Tabuleiro;
 
 public class DamasTest {
 
@@ -61,15 +69,14 @@ public class DamasTest {
     @Test
     public void testPromocaoSoldadoReal() {
         Casa quaseFim = tabuleiro.getCasa(1, 2);
-        Soldado soldado = new Soldado(quaseFim, Peca.Cor.BRANCO);
+        new Soldado(quaseFim, Peca.Cor.BRANCO);
 
         jogo.processarJogada(1, 2, 0, 3);
+        Peca pecaPromovida = tabuleiro.getCasa(0, 3).getPeca();
 
-        assertTrue(soldado.isReal(), "Soldado deve virar Soldado Real ao atingir a fileira inimiga");
-        assertTrue(soldado.getSimbolo().contains("♕"), "O desenho deve mudar para a coroa real (♕)");
-
-        Casa recuo = tabuleiro.getCasa(1, 4);
-        assertTrue(soldado.podeMover(recuo, tabuleiro), "Soldado Real deve conseguir andar para trás");
+        assertTrue(pecaPromovida instanceof SoldadoReal, "Soldado deve virar Soldado Real ao atingir a última fileira");
+        assertTrue(pecaPromovida.getSimbolo().contains("♕"), "A peça promovida deve usar o símbolo de Soldado Real");
+        assertTrue(pecaPromovida.podeMover(tabuleiro.getCasa(1, 4), tabuleiro), "Soldado Real deve conseguir andar para trás");
     }
 
     // 2. TESTES DO CAVALEIRO
@@ -115,8 +122,8 @@ public class DamasTest {
     @Test
     public void testCapturaMago() {
         Casa origem = tabuleiro.getCasa(7, 0);
-        Casa meio = tabuleiro.getCasa(5, 2);      
-        Casa destino = tabuleiro.getCasa(3, 4);   
+        Casa meio = tabuleiro.getCasa(5, 2);
+        Casa destino = tabuleiro.getCasa(3, 4);
 
         Mago mago = new Mago(origem, Peca.Cor.BRANCO);
         Soldado inimigo = new Soldado(meio, Peca.Cor.NEGRO);
@@ -160,10 +167,10 @@ public class DamasTest {
 
         jogo.processarJogada(4, 3, 0, 7);
 
-        assertEquals(mago, origem.getPeca(),"O Mago deve permanecer na posição original");
-        assertTrue(destino.estaVazia(),"A casa de destino deve permanecer vazia");
-        assertTrue(inimigo.estaVazia(),"A peça inimiga deve ser removida");
-        assertNull(alvo.getCasa(),"A peça capturada deve perder sua casa");
+        assertEquals(mago, origem.getPeca(), "O Mago deve permanecer na posição original");
+        assertTrue(destino.estaVazia(), "A casa de destino deve permanecer vazia");
+        assertTrue(inimigo.estaVazia(), "A peça inimiga deve ser removida");
+        assertNull(alvo.getCasa(), "A peça capturada deve perder sua casa");
     }
 
     // 5. TESTES DE FIM DE JOGO

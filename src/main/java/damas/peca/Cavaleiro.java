@@ -1,3 +1,7 @@
+package damas.peca;
+import damas.tabuleiro.Casa;
+import damas.tabuleiro.Tabuleiro;
+
 public class Cavaleiro extends Peca {
     public Cavaleiro(Casa casa, Cor cor) { super(casa, cor); }
 

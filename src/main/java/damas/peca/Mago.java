@@ -1,7 +1,10 @@
+package damas.peca;
+import damas.tabuleiro.Casa;
+import damas.tabuleiro.Tabuleiro;
+
 public class Mago extends Peca {
 
     private Casa alvoCaptura;
-
     public Mago(Casa casa, Cor cor) {
         super(casa, cor);
     }

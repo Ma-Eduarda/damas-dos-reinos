@@ -1,3 +1,9 @@
+package damas.tabuleiro;
+import damas.peca.Cavaleiro;
+import damas.peca.Mago;
+import damas.peca.Peca;
+import damas.peca.Soldado;
+
 public class Tabuleiro {
     public static final int MAX_LINHAS = 8;
     public static final int MAX_COLUNAS = 8;
@@ -44,23 +50,5 @@ public class Tabuleiro {
                 }
             }
         }
-    }
-
-    public void imprimir() {
-        System.out.println("\n     0  1  2  3  4  5  6  7 ");
-        for (int x = 0; x < MAX_LINHAS; x++) {
-            System.out.print("  " + x + " "); 
-            for (int y = 0; y < MAX_COLUNAS; y++) {
-                Casa c = casas[x][y];
-                String corFundo = ((x + y) % 2 != 0) ? ANSI_FUNDO_ESCURO : ANSI_FUNDO_CLARO;
-                if (c.estaVazia()) {
-                    System.out.print(corFundo + "   " + ANSI_RESET);
-                } else {
-                    System.out.print(corFundo + " " + c.getPeca().getSimbolo() + corFundo + " " + ANSI_RESET);
-                }
-            }
-            System.out.println(" " + x); 
-        }
-        System.out.println("     0  1  2  3  4  5  6  7 \n");
     }
 }

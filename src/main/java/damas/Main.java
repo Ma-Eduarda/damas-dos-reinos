@@ -1,8 +1,12 @@
+package damas;
 import java.util.Scanner;
+
+import damas.tabuleiro.ConsoleUi;
 
 public class Main {
     public static void main(String[] args) {
         Jogo jogo = new Jogo();
+        ConsoleUi consoleUi = new ConsoleUi();
 
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println("==================================================");
@@ -10,7 +14,7 @@ public class Main {
             System.out.println("==================================================");
             
             while (!jogo.verificarFimDeJogo()) {
-                jogo.getTabuleiro().imprimir();
+                consoleUi.imprimirTabuleiro(jogo.getTabuleiro());
                 System.out.println("Turno atual: " + jogo.getTurno());
                 System.out.print("Digite: LinhaOrigem ColunaOrigem LinhaDestino ColunaDestino (Ex: 5 0 4 1): ");
                 
@@ -27,7 +31,7 @@ public class Main {
                 }
             }
             System.out.println("\n--- TABULEIRO FINAL ---");
-            jogo.getTabuleiro().imprimir();
+            consoleUi.imprimirTabuleiro(jogo.getTabuleiro());
         }
     }
 }

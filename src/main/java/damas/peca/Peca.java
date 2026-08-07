@@ -1,3 +1,7 @@
+package damas.peca;
+import damas.tabuleiro.Casa;
+import damas.tabuleiro.Tabuleiro;
+
 public abstract class Peca {
     public enum Cor { BRANCO, NEGRO }
     
