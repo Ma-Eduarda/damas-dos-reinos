@@ -21,7 +21,7 @@ public class Soldado extends Peca {
 
         int direcao = (cor == Cor.BRANCO) ? -1 : 1;
 
-        return linha == direcao&& coluna == 1&& destino.estaVazia();
+        return linha == direcao && coluna == 1 && destino.estaVazia();
     }
 
     @Override
