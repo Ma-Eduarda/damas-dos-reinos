@@ -1,10 +1,8 @@
-package damas.peca;
+package damas.pecas;
 import damas.tabuleiro.Casa;
 import damas.tabuleiro.Tabuleiro;
 
-public abstract class Peca {
-    public enum Cor { BRANCO, NEGRO }
-    
+public abstract class Peca {    
     public static final String ANSI_RESET = "\033[0m";
     public static final String ANSI_VERDE = "\033[32m";       
     public static final String ANSI_VERMELHO = "\033[31m";    

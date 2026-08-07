@@ -6,11 +6,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import damas.Jogo;
-import damas.peca.Cavaleiro;
-import damas.peca.Mago;
-import damas.peca.Peca;
-import damas.peca.Soldado;
-import damas.peca.SoldadoReal;
+import damas.pecas.Cavaleiro;
+import damas.pecas.Cor;
+import damas.pecas.Mago;
+import damas.pecas.Peca;
+import damas.pecas.Soldado;
+import damas.pecas.SoldadoReal;
 import damas.tabuleiro.Casa;
 import damas.tabuleiro.Tabuleiro;
 
@@ -43,7 +44,7 @@ public class DamasTest {
         Casa origem = tabuleiro.getCasa(5, 0);
         Casa destino = tabuleiro.getCasa(4, 1);
 
-        Soldado soldado = new Soldado(origem, Peca.Cor.BRANCO);
+        Soldado soldado = new Soldado(origem, Cor.BRANCO);
         assertTrue(soldado.podeMover(destino, tabuleiro), "Soldado Branco deve poder mover para frente na diagonal");
 
         Casa tras = tabuleiro.getCasa(6, 1);
@@ -56,8 +57,8 @@ public class DamasTest {
         Casa meio = tabuleiro.getCasa(4, 1);
         Casa destino = tabuleiro.getCasa(3, 2);
 
-        Soldado soldadoBranco = new Soldado(origem, Peca.Cor.BRANCO);
-        Soldado inimigo = new Soldado(meio, Peca.Cor.NEGRO);
+        Soldado soldadoBranco = new Soldado(origem, Cor.BRANCO);
+        Soldado inimigo = new Soldado(meio, Cor.NEGRO);
 
         assertTrue(soldadoBranco.podeCapturar(destino, tabuleiro), "Soldado deve identificar captura por salto");
         jogo.processarJogada(5, 0, 3, 2);
@@ -69,7 +70,7 @@ public class DamasTest {
     @Test
     public void testPromocaoSoldadoReal() {
         Casa quaseFim = tabuleiro.getCasa(1, 2);
-        new Soldado(quaseFim, Peca.Cor.BRANCO);
+        new Soldado(quaseFim, Cor.BRANCO);
 
         jogo.processarJogada(1, 2, 0, 3);
         Peca pecaPromovida = tabuleiro.getCasa(0, 3).getPeca();
@@ -86,7 +87,7 @@ public class DamasTest {
         Casa destinoL1 = tabuleiro.getCasa(2, 4);
         Casa destinoL2 = tabuleiro.getCasa(3, 5);
 
-        Cavaleiro cavaleiro = new Cavaleiro(origem, Peca.Cor.BRANCO);
+        Cavaleiro cavaleiro = new Cavaleiro(origem, Cor.BRANCO);
 
         assertTrue(cavaleiro.podeMover(destinoL1, tabuleiro), "Cavaleiro deve mover em L (2x1)");
         assertTrue(cavaleiro.podeMover(destinoL2, tabuleiro), "Cavaleiro deve mover em L (1x2)");
@@ -97,8 +98,8 @@ public class DamasTest {
         Casa origem = tabuleiro.getCasa(4, 3);
         Casa destino = tabuleiro.getCasa(2, 4);
 
-        Cavaleiro cavaleiro = new Cavaleiro(origem, Peca.Cor.BRANCO);
-        Soldado inimigo = new Soldado(destino, Peca.Cor.NEGRO);
+        Cavaleiro cavaleiro = new Cavaleiro(origem, Cor.BRANCO);
+        Soldado inimigo = new Soldado(destino, Cor.NEGRO);
 
         assertTrue(cavaleiro.podeCapturar(destino, tabuleiro), "Cavaleiro deve capturar ocupando a casa do inimigo");
 
@@ -114,7 +115,7 @@ public class DamasTest {
         Casa origem = tabuleiro.getCasa(7, 0);
         Casa destinoLonge = tabuleiro.getCasa(3, 4);
 
-        Mago mago = new Mago(origem, Peca.Cor.BRANCO);
+        Mago mago = new Mago(origem, Cor.BRANCO);
 
         assertTrue(mago.podeMover(destinoLonge, tabuleiro), "Mago deve andar livremente por longas distâncias na diagonal");
     }
@@ -125,8 +126,8 @@ public class DamasTest {
         Casa meio = tabuleiro.getCasa(5, 2);
         Casa destino = tabuleiro.getCasa(3, 4);
 
-        Mago mago = new Mago(origem, Peca.Cor.BRANCO);
-        Soldado inimigo = new Soldado(meio, Peca.Cor.NEGRO);
+        Mago mago = new Mago(origem, Cor.BRANCO);
+        Soldado inimigo = new Soldado(meio, Cor.NEGRO);
 
         assertTrue(mago.podeCapturar(destino, tabuleiro), "Mago deve poder atirar quando houver exatamente um inimigo no caminho");
         jogo.processarJogada(7, 0, 3, 4);
@@ -144,10 +145,10 @@ public class DamasTest {
         Casa inimigo = tabuleiro.getCasa(5, 2);
         Casa destino = tabuleiro.getCasa(3, 4);
 
-        Mago mago = new Mago(origem, Peca.Cor.BRANCO);
+        Mago mago = new Mago(origem, Cor.BRANCO);
 
-        new Soldado(aliado, Peca.Cor.BRANCO);
-        new Soldado(inimigo, Peca.Cor.NEGRO);
+        new Soldado(aliado, Cor.BRANCO);
+        new Soldado(inimigo, Cor.NEGRO);
 
         assertFalse(mago.podeCapturar(destino, tabuleiro), "O Mago não pode atirar se existir uma peça aliada antes do inimigo");
     }
@@ -160,8 +161,8 @@ public class DamasTest {
         Casa inimigo = tabuleiro.getCasa(2, 5);
         Casa destino = tabuleiro.getCasa(0, 7);
 
-        Mago mago = new Mago(origem, Peca.Cor.BRANCO);
-        Soldado alvo = new Soldado(inimigo, Peca.Cor.NEGRO);
+        Mago mago = new Mago(origem, Cor.BRANCO);
+        Soldado alvo = new Soldado(inimigo, Cor.NEGRO);
 
         assertTrue(mago.podeCapturar(destino, tabuleiro));
 
@@ -176,8 +177,8 @@ public class DamasTest {
     // 5. TESTES DE FIM DE JOGO
     @Test
     public void testFimDeJogoEliminacao() {
-        new Soldado(tabuleiro.getCasa(5, 0), Peca.Cor.BRANCO);
-        new Soldado(tabuleiro.getCasa(4, 1), Peca.Cor.NEGRO);
+        new Soldado(tabuleiro.getCasa(5, 0), Cor.BRANCO);
+        new Soldado(tabuleiro.getCasa(4, 1), Cor.NEGRO);
 
         jogo.processarJogada(5, 0, 3, 2);
         assertTrue(jogo.verificarFimDeJogo(), "O jogo deve declarar fim quando um jogador perde todas as peças");
@@ -185,11 +186,11 @@ public class DamasTest {
 
     @Test
     public void testFimDeJogoAfogamento() {
-        Soldado soldadoPreso = new Soldado(tabuleiro.getCasa(4, 3), Peca.Cor.BRANCO);
-        new Soldado(tabuleiro.getCasa(3, 2), Peca.Cor.NEGRO);
-        new Soldado(tabuleiro.getCasa(3, 4), Peca.Cor.NEGRO);
-        new Soldado(tabuleiro.getCasa(2, 1), Peca.Cor.NEGRO);
-        new Soldado(tabuleiro.getCasa(2, 5), Peca.Cor.NEGRO);
+        Soldado soldadoPreso = new Soldado(tabuleiro.getCasa(4, 3), Cor.BRANCO);
+        new Soldado(tabuleiro.getCasa(3, 2), Cor.NEGRO);
+        new Soldado(tabuleiro.getCasa(3, 4), Cor.NEGRO);
+        new Soldado(tabuleiro.getCasa(2, 1), Cor.NEGRO);
+        new Soldado(tabuleiro.getCasa(2, 5), Cor.NEGRO);
 
         assertFalse(soldadoPreso.podeMover(tabuleiro.getCasa(3, 2), tabuleiro), "Avanço para (3,2) deve estar bloqueado");
         assertFalse(soldadoPreso.podeMover(tabuleiro.getCasa(3, 4), tabuleiro), "Avanço para (3,4) deve estar bloqueado");

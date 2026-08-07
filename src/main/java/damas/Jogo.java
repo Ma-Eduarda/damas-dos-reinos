@@ -1,27 +1,28 @@
 package damas;
-import damas.peca.Peca;
+import damas.pecas.Cor;
+import damas.pecas.Peca;
 import damas.tabuleiro.Casa;
 import damas.tabuleiro.Tabuleiro;
 
 public class Jogo {
     private final Tabuleiro tabuleiro;
-    private Peca.Cor turnoAtual;
+    private Cor turnoAtual;
 
     public Jogo() {
         tabuleiro = new Tabuleiro();
-        turnoAtual = Peca.Cor.BRANCO;
+        turnoAtual = Cor.BRANCO;
     }
 
     public Tabuleiro getTabuleiro() {
         return tabuleiro;
     }
 
-    public Peca.Cor getTurnoAtual() {
+    public Cor getTurnoAtual() {
         return turnoAtual;
     }
 
     public String getTurno() {
-        if (turnoAtual == Peca.Cor.BRANCO) {
+        if (turnoAtual == Cor.BRANCO) {
             return Peca.ANSI_VERDE + "REINO BRANCO (♟ ♞ ★)" + Peca.ANSI_RESET;
         } else {
             return Peca.ANSI_VERMELHO + "REINO NEGRO (♟ ♞ ★)" + Peca.ANSI_RESET;
@@ -52,10 +53,10 @@ public class Jogo {
 
         if (jogadaFeita) {
             peca.verificarPromocao(peca.getCasa().getX());
-            if (turnoAtual == Peca.Cor.BRANCO) {
-                turnoAtual = Peca.Cor.NEGRO;
+            if (turnoAtual == Cor.BRANCO) { 
+                turnoAtual = Cor.NEGRO;
             } else {
-                turnoAtual = Peca.Cor.BRANCO;
+                turnoAtual = Cor.BRANCO;
             }
             return true;
         }
@@ -79,7 +80,7 @@ public class Jogo {
                 if (!casa.estaVazia()) {
                     Peca peca = casa.getPeca();
 
-                    if (peca.getCor() == Peca.Cor.BRANCO) {
+                    if (peca.getCor() == Cor.BRANCO) {
                         pecasBrancas++;
                         if (temMovimentoValido(peca)) {
                             movimentoPossivelBranco = true;
@@ -105,12 +106,12 @@ public class Jogo {
             return true;
         }
 
-        if (turnoAtual == Peca.Cor.BRANCO&& !movimentoPossivelBranco) {
+        if (turnoAtual == Cor.BRANCO&& !movimentoPossivelBranco) {
             System.out.println("\n👑 FIM DE JOGO! " + "O REINO BRANCO está afogado! " + "Vitória do REINO NEGRO! 👑");
             return true;
         }
 
-        if (turnoAtual == Peca.Cor.NEGRO && !movimentoPossivelNegro) {
+        if (turnoAtual == Cor.NEGRO && !movimentoPossivelNegro) {
             System.out.println("\n👑 FIM DE JOGO! " + "O REINO NEGRO está afogado! " + "Vitória do REINO BRANCO! 👑");
             return true;
         }

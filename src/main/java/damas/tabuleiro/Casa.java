@@ -1,5 +1,5 @@
 package damas.tabuleiro;
-import damas.peca.Peca;
+import damas.pecas.Peca;
 
 public class Casa {
     private final int x;

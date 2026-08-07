@@ -1,8 +1,8 @@
 package damas.tabuleiro;
-import damas.peca.Cavaleiro;
-import damas.peca.Mago;
-import damas.peca.Peca;
-import damas.peca.Soldado;
+import damas.pecas.Cavaleiro;
+import damas.pecas.Cor;
+import damas.pecas.Mago;
+import damas.pecas.Soldado;
 
 public class Tabuleiro {
     public static final int MAX_LINHAS = 8;
@@ -39,14 +39,14 @@ public class Tabuleiro {
                     Casa casa = getCasa(x, y);
 
                     // --- REINO NEGRO ---
-                    if (x == 0) new Mago(casa, Peca.Cor.NEGRO);
-                    else if (x == 1) new Cavaleiro(casa, Peca.Cor.NEGRO);
-                    else if (x == 2) new Soldado(casa, Peca.Cor.NEGRO);
+                    if (x == 0) new Mago(casa, Cor.NEGRO);
+                    else if (x == 1) new Cavaleiro(casa, Cor.NEGRO);
+                    else if (x == 2) new Soldado(casa, Cor.NEGRO);
                     
                     // --- REINO BRANCO ---
-                    else if (x == 5) new Soldado(casa, Peca.Cor.BRANCO);
-                    else if (x == 6) new Cavaleiro(casa, Peca.Cor.BRANCO);
-                    else if (x == 7) new Mago(casa, Peca.Cor.BRANCO);
+                    else if (x == 5) new Soldado(casa, Cor.BRANCO);
+                    else if (x == 6) new Cavaleiro(casa, Cor.BRANCO);
+                    else if (x == 7) new Mago(casa, Cor.BRANCO);
                 }
             }
         }

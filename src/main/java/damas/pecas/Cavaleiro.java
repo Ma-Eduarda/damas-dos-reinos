@@ -1,4 +1,4 @@
-package damas.peca;
+package damas.pecas;
 import damas.tabuleiro.Casa;
 import damas.tabuleiro.Tabuleiro;
 
