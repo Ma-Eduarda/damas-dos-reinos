@@ -1,44 +1,41 @@
 # Damas dos Reinos
 
-Projeto em Java desenvolvido com Maven para simular o jogo de Damas dos Reinos em modo console.
+Projeto desenvolvido em **Java** para a disciplina de **Padrões de Projeto de Software**, do curso de **Sistemas para Internet – IFPB**.
 
-## Sobre o projeto
-Este repositório implementa um jogo de tabuleiro com:
-- interface de console para exibir o tabuleiro;
-- movimentação de peças;
-- captura de peças;
-- controle de turno;
-- verificação de fim de jogo.
+O projeto consiste em uma variação do jogo de damas executada via console, utilizando diferentes tipos de peças e regras próprias de movimentação e captura.
 
-## Estrutura do projeto
-- src/main/java: código principal do jogo e da interface de terminal;
-- src/test/java: testes automatizados com JUnit 5.
+## Objetivo
 
-## Requisitos
-- Java 25
-- Maven 3.9+
+Aplicar conceitos de **GRASP** e **SOLID** no desenvolvimento do jogo, buscando uma estrutura organizada, reutilizável e de fácil manutenção.
+
+## Principais funcionalidades
+
+* Tabuleiro 8x8;
+* Soldado, Soldado Real, Cavaleiro e Mago;
+* Movimentos e capturas específicos para cada peça;
+* Controle de turnos;
+* Promoção do Soldado;
+* Captura opcional;
+* Fim de jogo por eliminação ou afogamento;
+* Testes automatizados com JUnit 5.
+
+## Tecnologias
+
+* Java 25
+* Maven
+* JUnit 5
+* Git/GitHub
 
 ## Como executar
-Na raiz do projeto, execute:
+
+Na raiz do projeto:
 
 ```bash
 mvn clean package
 java -jar target/damas.jar
 ```
 
-Ao iniciar, o jogo solicitará entradas no formato:
-
-```text
-LinhaOrigem ColunaOrigem LinhaDestino ColunaDestino
-```
-
-Exemplo:
-
-```text
-5 0 4 1
-```
-
-## Como rodar os testes
+## Como executar os testes
 
 ```bash
 mvn test
